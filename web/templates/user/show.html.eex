@@ -1,0 +1,98 @@
+<h2>Show user</h2>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+  <li>
+    <strong>Bio:</strong>
+    <%= @user.bio %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <%= @user.image %>
+  </li>
+
+  <li>
+    <strong>Rating:</strong>
+    <%= @user.rating %>
+  </li>
+    
+</ul>
+
+<h2>User's Meal</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Serving Size</th>
+      <th>Serving Time</th>
+      <th>Cuisine Type</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <%= for meal <- @user.meals do %>
+    <tr>
+      <td><%= meal.name %></td>
+      <td><%= meal.servingSize %></td>
+      <td><%= meal.servingTime %></td>
+      <td><%= meal.cuisineType %></td>
+      <td><%= meal.latitude %></td>
+      <td><%= meal.longitude %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: user_meal_path(@conn, :show, @user, meal), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: user_meal_path(@conn, :edit, @user, meal), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: user_meal_path(@conn, :delete, @user, meal), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<h2>User's Groups</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Unread Messages?</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for chatGroup <- @user.chatGroups do %>
+    <tr>
+      <td><%= chatGroup.name %></td>
+      <td><%= chatGroup.unreadMessages %></td>
+      
+      <td class="text-right">
+        <%= link "Show", to: user_chat_group_path(@conn, :show, @user, chatGroup), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: user_chat_group_path(@conn, :edit, @user, chatGroup), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: user_chat_group_path(@conn, :delete, @user, chatGroup), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+<%= link "Edit User", to: user_path(@conn, :edit, @user) %>
+<br>
+<%= link "New Meal", to: user_meal_path(@conn, :new, @user) %>
+<br>
+<%= link "New Chat Group", to: user_chat_group_path(@conn, :new, @user) %>
+<br>
+<%= link "Back", to: meal_path(@conn, :index) %>

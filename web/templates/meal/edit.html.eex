@@ -1,0 +1,6 @@
+<h2>Edit Meal</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: user_meal_path(@conn, :update, List.first(@meal.users), @meal) %>
+
+<%= link "Back", to: user_path(@conn, :show, List.first(@meal.users)) %>

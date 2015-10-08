@@ -1,0 +1,54 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below:</p>
+      <ul>
+        <%= for {attr, message} <- f.errors do %>
+          <li><%= humanize(attr) %> <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :name, "Name", class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :servingSize, "Serving Size", class: "control-label" %>
+    <%= number_input f, :servingSize, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :servingTime, "Serving Time", class: "control-label" %>
+    <%= text_input f, :servingTime, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :cuisineType, "Cusine Type", class: "control-label" %>
+    <%= text_input f, :cuisineType, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :latitude, "Latitude", class: "control-label" %>
+    <%= number_input f, :latitude, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :longitude, "Longitude", class: "control-label" %>
+    <%= number_input f, :longitude, class: "form-control" %>
+  </div>
+
+  <%= inputs_for f, :userMeals, fn i -> %>
+    <%= if i.index == 0 do %>
+      <%= hidden_input i, :user_id, class: "form-control userMealMembers" %>
+    <% else %>
+      <%= label i, :user_id, "User Ids #{i.model.user_id}", class: "control-label userMealMembers" %>  
+    <% end %>
+  <% end %>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

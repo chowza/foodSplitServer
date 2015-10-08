@@ -1,0 +1,29 @@
+<h2>Listing meals</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Serving Size</th>
+      <th>Serving Time</th>
+      <th>Cuisine Type</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for meal <- @meals do %>
+    <tr>
+      <td><%= meal.name %></td>
+      <td><%= meal.servingSize %></td>
+      <td><%= meal.servingTime %></td>
+      <td><%= meal.cuisineType %></td>
+      <td><%= meal.latitude %></td>
+      <td><%= meal.longitude %></td>
+
+    </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,0 +1,6 @@
+<h2>New Chat Group</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: user_chat_group_path(@conn, :create, @conn.params["user_id"]) %>
+
+<%= link "Back", to: user_path(@conn, :show, @conn.params["user_id"]) %>

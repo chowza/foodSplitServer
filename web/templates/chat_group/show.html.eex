@@ -1,0 +1,45 @@
+<h2>Show Chat Group</h2>
+
+<%= unless is_nil(@chatGroup) do %>
+<ul>
+
+  <h2>Chat Name</h2>
+  <li>
+    <%= @chatGroup.name %>
+  </li>
+
+
+  <h2>Members</h2>
+  <%= for user <- @chatGroup.users do %>
+    <li>
+      <%= user.name %>
+    </li>
+
+  <% end %>
+
+  <h2>Messages</h2>
+  <%= for message <- @chatGroup.messages do %>
+    <li>
+      <strong><%= message.user_id %></strong>
+      <%= message.content %>
+    </li>
+  <% end %>
+</ul>
+
+<%= form_for @changeset, user_chat_group_message_path(@conn, :create, @conn.params["user_id"], @conn.params["id"]), fn f -> %>
+  
+  <%= hidden_input f, :user_id, class: "form-control userChatGroup" %>
+  <%= hidden_input f, :chat_group_id, class: "form-control userChatGroup" %>
+  
+  <div class="form-group">
+    <%= label f, :content, "Message Content", class: "control-label" %>
+    <%= text_input f, :content, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link "Edit", to: user_chat_group_path(@conn, :edit, @conn.params["user_id"], @chatGroup) %>
+<% end %>
+<%= link "Back", to: user_path(@conn, :show, @conn.params["user_id"]) %>

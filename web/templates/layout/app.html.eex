@@ -12,6 +12,7 @@
   </head>
 
   <body>
+
     <div class="container" role="main">
       <div class="header">
         <ul class="nav nav-pills pull-right">
@@ -24,8 +25,10 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <%= @inner %>
-
+      <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+      <script>var app = require("web/static/js/app")</script>
+      <script>var formHelpers = require("web/static/js/formHelpers")</script>
     </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

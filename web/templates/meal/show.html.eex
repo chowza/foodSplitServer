@@ -1,0 +1,42 @@
+<h2>Show meal</h2>
+
+<%= unless is_nil(@meal) do %>
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @meal.name %>
+  </li>
+
+  <li>
+    <strong>Serving Size:</strong>
+    <%= @meal.servingSize %>
+  </li>
+
+  <li>
+    <strong>Serving Time:</strong>
+    <%= @meal.servingTime %>
+  </li>
+
+  <li>
+    <strong>Cusine Type:</strong>
+    <%= @meal.cuisineType %>
+  </li>
+
+  <li>
+    <strong>Latitude:</strong>
+    <%= @meal.latitude %>
+  </li>
+
+  <li>
+    <strong>Longitude:</strong>
+    <%= @meal.longitude %>
+  </li>
+</ul>
+
+
+
+ <%= link "Edit", to: user_meal_path(@conn, :edit, List.first(@meal.users), @meal) %>
+
+<% end %>
+<%= link "Back", to: meal_path(@conn, :index) %>
