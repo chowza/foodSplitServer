@@ -11,11 +11,16 @@ defmodule FoodSplitServer.MealController do
 
   # shared
 
-  def index(conn, _) do
+  def all(conn, _) do
     
     #for all meals
     meals = Meal |> Repo.all
     render(conn, :index, meals: meals)
+  end
+
+  def index(conn, %{"user_id" => user_id}) do
+    meal = Meal |> join(:left,[meal], user in assoc(meal, :users)) |> where([_,user], user.id == ^user_id) |> select([meal, _], meal) |> Repo.all
+    render(conn, :index, meals: meal)
   end
 
   def show(conn, %{"id" => id, "user_id" => user_id}) do

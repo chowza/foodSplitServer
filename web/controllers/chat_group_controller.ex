@@ -6,6 +6,13 @@ defmodule FoodSplitServer.ChatGroupController do
   alias FoodSplitServer.Message
   import Ecto.Query
   
+
+
+  def index(conn, %{"user_id" => user_id}) do
+    chatGroups = ChatGroup |> join(:left,[chatGroup], user in assoc(chatGroup, :users)) |> where([_,user], user.id == ^user_id) |> select([chatGroup, _], chatGroup) |> Repo.all
+    render(conn, :index, chatGroups: chatGroups)
+  end
+
   def create(conn, %{"chat_group" => chat_group_params, "user_id" => user_id}) do
 
 

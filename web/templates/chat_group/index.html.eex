@@ -1,34 +1,28 @@
-<h2>Listing users</h2>
+<h2>User's Groups</h2>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Email</th>
       <th>Name</th>
-      <th>Bio</th>
-      <th>Image</th>
-      <th>Rating</th>
-
-      <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for user <- @users do %>
-    <tr>
-      <td><%= user.email %></td>
-      <td><%= user.name %></td>
-      <td><%= user.bio %></td>
-      <td><%= user.image %></td>
-      <td><%= user.rating %></td>
-
-      <td class="text-right">
-        <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
+  <%= unless is_nil(@chatGroups) do %>
+    <%= for chatGroup <- @chatGroups do %>
+      <tr>
+        <td><%= chatGroup.name %></td>
+        
+        <td class="text-right">
+          <%= link "Show", to: user_chat_group_path(@conn, :show, @conn.params["user_id"], chatGroup), class: "btn btn-default btn-xs" %>
+          <%= link "Edit", to: user_chat_group_path(@conn, :edit, @conn.params["user_id"], chatGroup), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: user_chat_group_path(@conn, :delete, @conn.params["user_id"], chatGroup), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
   </tbody>
 </table>
 
-<%= link "New user", to: user_path(@conn, :new) %>
+<%= link "New Chat Group", to: user_chat_group_path(@conn, :new, @conn.params["user_id"]) %>
+<br>
+<%= link "Back", to: user_path(@conn, :show,  @conn.params["user_id"]) %>

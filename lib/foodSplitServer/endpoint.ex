@@ -35,5 +35,6 @@ defmodule FoodSplitServer.Endpoint do
     key: "_foodSplitServer_key",
     signing_salt: "5fxcTUI0"
 
+  plug CORSPlug
   plug FoodSplitServer.Router
 end

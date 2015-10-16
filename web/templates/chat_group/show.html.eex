@@ -30,7 +30,6 @@
   
   <%= hidden_input f, :user_id, class: "form-control userChatGroup" %>
   <%= hidden_input f, :chat_group_id, class: "form-control userChatGroup" %>
-  
   <div class="form-group">
     <%= label f, :content, "Message Content", class: "control-label" %>
     <%= text_input f, :content, class: "form-control" %>

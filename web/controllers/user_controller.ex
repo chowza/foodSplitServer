@@ -7,9 +7,19 @@ defmodule FoodSplitServer.UserController do
 
   # shared
 
+  def show(conn, %{"id" => id, "name" => name, "image" => image}) do
+    user = User |> Repo.get(id)
+    if is_nil(user) do
+      params = %{"user" => %{name: name, id: id, image: image}}
+      create(conn,params)
+    else 
+      render(conn, :show, user: user |> Repo.preload [:meals, :chatGroups])
+    end
+  end
+
   def show(conn, %{"id" => id}) do
-    user = User |> Repo.get!(id) |> Repo.preload [:meals, :chatGroups]
-    render(conn, :show, user: user)
+    user = User |> Repo.get!(id)
+    render(conn, :show, user: user |> Repo.preload [:meals, :chatGroups])
   end
 
   def create(conn, %{"user" => user_params}) do

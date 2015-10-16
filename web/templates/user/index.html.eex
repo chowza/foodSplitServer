@@ -3,7 +3,6 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Email</th>
       <th>Name</th>
       <th>Bio</th>
       <th>Image</th>
@@ -15,7 +14,6 @@
   <tbody>
 <%= for user <- @users do %>
     <tr>
-      <td><%= user.email %></td>
       <td><%= user.name %></td>
       <td><%= user.bio %></td>
       <td><%= user.image %></td>

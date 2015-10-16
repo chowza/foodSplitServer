@@ -27,3 +27,7 @@
 <% end %>
   </tbody>
 </table>
+
+<%= link "New Meal", to: user_meal_path(@conn, :new, @conn.params["user_id"]) %>
+<br>
+<%= link "Back", to: user_path(@conn, :show,  @conn.params["user_id"]) %>

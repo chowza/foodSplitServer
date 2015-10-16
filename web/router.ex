@@ -10,6 +10,7 @@ defmodule FoodSplitServer.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, [origin: "http://localhost:8080"]
     plug :accepts, ["json"]
   end
 
@@ -17,12 +18,14 @@ defmodule FoodSplitServer.Router do
     pipe_through :browser # Use the default browser stack
 
     resources "users", UserController do
-      resources "meals", MealController, except: [:index]
+      resources "meals", MealController
+
       resources "chatGroups", ChatGroupController, except: [:index]  do
         resources "messages", MessageController, only: [:create]
       end
+      resources "chatGroups", ChatGroupController, only: [:index]
     end
-    resources "meals", MealController, only: [:index]
+    get "/meals", MealController, :all
     
   end
 
@@ -33,10 +36,13 @@ defmodule FoodSplitServer.Router do
     pipe_through :api
 
     resources "users", UserController do
-      resources "meals", MealController, except: [:index]
-      resources "chatGroups", ChatGroupController, except: [:index]
+      resources "meals", MealController
+      resources "chatGroups", ChatGroupController, except: [:index]  do
+        resources "messages", MessageController, only: [:create]
+      end
+      resources "chatGroups", ChatGroupController, only: [:index]
     end
-    resources "meals", MealController, only: [:index]
+    get "/meals", MealController, :all
 
     # resources "/messages", MessageController
   end

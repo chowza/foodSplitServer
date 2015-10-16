@@ -2,7 +2,6 @@ defmodule FoodSplitServer.User do
   use FoodSplitServer.Web, :model
 
   schema "users" do
-    field :email, :string
     field :name, :string
     field :bio, :string
     field :image, :string
@@ -16,7 +15,7 @@ defmodule FoodSplitServer.User do
     timestamps
   end
 
-  @required_fields ~w(email name)
+  @required_fields ~w(name id)
   @optional_fields ~w(bio image rating)
 
   @doc """

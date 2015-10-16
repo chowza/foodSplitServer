@@ -2,11 +2,7 @@
 
 <ul>
 
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
-
+  
   <li>
     <strong>Name:</strong>
     <%= @user.name %>
@@ -95,4 +91,4 @@
 <br>
 <%= link "New Chat Group", to: user_chat_group_path(@conn, :new, @user) %>
 <br>
-<%= link "Back", to: meal_path(@conn, :index) %>
+<%= link "Back", to: meal_path(@conn, :all) %>
