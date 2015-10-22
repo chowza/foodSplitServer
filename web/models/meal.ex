@@ -14,8 +14,8 @@ defmodule FoodSplitServer.Meal do
     timestamps
   end
 
-  @required_fields ~w(name servingSize cuisineType)
-  @optional_fields ~w(latitude longitude servingTime userMeals)
+  @required_fields ~w(name servingSize cuisineType userMeals)
+  @optional_fields ~w(latitude longitude servingTime)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

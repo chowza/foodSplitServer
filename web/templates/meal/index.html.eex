@@ -10,7 +10,7 @@
       <th>Latitude</th>
       <th>Longitude</th>
 
-      <th></th>
+      <th>User Id</th>
     </tr>
   </thead>
   <tbody>
@@ -22,12 +22,16 @@
       <td><%= meal.cuisineType %></td>
       <td><%= meal.latitude %></td>
       <td><%= meal.longitude %></td>
+      <td><%=List.first(meal.users).id%></td>
 
     </tr>
 <% end %>
   </tbody>
 </table>
 
+<%= unless is_nil(@conn.params["user_id"]) do %>
+
 <%= link "New Meal", to: user_meal_path(@conn, :new, @conn.params["user_id"]) %>
 <br>
 <%= link "Back", to: user_path(@conn, :show,  @conn.params["user_id"]) %>
+<%end%>

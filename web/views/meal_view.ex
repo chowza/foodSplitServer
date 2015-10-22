@@ -10,13 +10,17 @@ defmodule FoodSplitServer.MealView do
   end
 
   def render("meal.json", %{meal: meal}) do
+    
+    user_id = List.first(meal.users).id
+    
     %{id: meal.id,
       name: meal.name,
       servingSize: meal.servingSize,
       servingTime: meal.servingTime,
       cuisineType: meal.cuisineType,
       latitude: meal.latitude,
-      longitude: meal.longitude
+      longitude: meal.longitude,
+      user_id: user_id
   	}
   end
 end
